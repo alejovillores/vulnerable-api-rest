@@ -31,4 +31,5 @@ class UserService:
         
         if res.fetchone() is not None:
             return True
-        return False
+        
+        raise Exception('invalid')

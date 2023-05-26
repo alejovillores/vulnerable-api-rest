@@ -26,9 +26,12 @@ async def register(request: Request):
 
 @app.post("/login",status_code=200)
 async def login(request: Request):
-    user_service = UserService()
-    json = await request.json()
-    username = json["username"]
-    password = json["password"]
+    try:
+        user_service = UserService()
+        json = await request.json()
+        username = json["username"]
+        password = json["password"]
 
-    return user_service.login(db,username, password)
+        return user_service.login(db,username, password)
+    except:
+        raise HTTPException(status_code=401, detail="error")
