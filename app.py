@@ -1,10 +1,15 @@
 from fastapi import FastAPI, Request, HTTPException, Response
 from db.config import Database
 from services.user_service import UserService
+from services.password_service import PasswordService
+
 
 
 db = Database()
 db.create_user_table()
+db.create_password_table()
+
+
 app = FastAPI()
 
 @app.get("/")
@@ -36,3 +41,18 @@ async def login(request: Request, response: Response):
         return res
     except:
         raise HTTPException(status_code=401, detail="login invalido")
+
+
+@app.post("/password",status_code=201)
+async def add_password(request: Request):
+    try:
+        cookie = request.cookies.get('auth')
+        if bool(cookie):
+            password_service = PasswordService()
+            json = await request.json()
+            username = json["username"]
+            password = json["password"]
+            dst = json["dst"]
+            return password_service.add(db,username,password,dst)
+    except:
+        raise HTTPException(status_code=401, detail="no se pudo insertar contraseña")

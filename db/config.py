@@ -8,6 +8,11 @@ class Database:
         sql_sentence = "create table if not exists users(username TEXT, password TEXT)"
         cursor = self.con.cursor()
         cursor.execute(sql_sentence)
+    
+    def create_password_table(self):
+        sql_sentence = "create table if not exists passwords(username TEXT, password TEXT, dst TEXT)"
+        cursor = self.con.cursor()
+        cursor.execute(sql_sentence)
 
     def execute(self, sql_sentence):
         cursor = self.con.cursor()
@@ -20,7 +25,7 @@ class Database:
         self.con.commit()
         return res
     
-    
+
     def close(self):
         self.connection.close()
 
