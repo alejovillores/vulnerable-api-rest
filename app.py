@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request,HTTPException
+from fastapi import FastAPI, Request, HTTPException, Response
 from db.config import Database
 from services.user_service import UserService
 
@@ -25,13 +25,14 @@ async def register(request: Request):
 
 
 @app.post("/login",status_code=200)
-async def login(request: Request):
+async def login(request: Request, response: Response):
     try:
         user_service = UserService()
         json = await request.json()
         username = json["username"]
         password = json["password"]
-
-        return user_service.login(db,username, password)
+        res = user_service.login(db,username, password)
+        response.set_cookie(key="auth", value=str(res))
+        return res
     except:
-        raise HTTPException(status_code=401, detail="error")
+        raise HTTPException(status_code=401, detail="login invalido")
