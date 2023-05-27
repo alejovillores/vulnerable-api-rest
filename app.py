@@ -1,9 +1,8 @@
 from fastapi import FastAPI, Request, HTTPException, Response
+from fastapi.middleware.cors import CORSMiddleware
 from db.config import Database
 from services.user_service import UserService
 from services.password_service import PasswordService
-
-
 
 db = Database()
 db.create_user_table()
@@ -11,6 +10,13 @@ db.create_password_table()
 
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
