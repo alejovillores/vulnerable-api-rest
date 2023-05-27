@@ -56,3 +56,10 @@ async def add_password(request: Request):
             return password_service.add(db,username,password,dst)
     except:
         raise HTTPException(status_code=401, detail="no se pudo insertar contraseña")
+
+@app.get("/password",status_code=200)
+async def find_password(request: Request, username: str, dst: str):
+    cookie = request.cookies.get('auth')
+    if bool(cookie):
+        password_service = PasswordService()
+        return password_service.get(db,username,dst)

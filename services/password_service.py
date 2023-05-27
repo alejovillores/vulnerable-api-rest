@@ -8,3 +8,9 @@ class PasswordService:
             db.put(sql_sentence,(username,password,dst))
             return {"username": username, "password_status": "OK", "dst": dst} 
         raise Exception('exception')
+
+    def get(self,db,username,dst):
+        sql_sentence = "SELECT * FROM passwords WHERE dst = '{}' AND username = '{}' ".format(dst,username) 
+        print(sql_sentence)
+        res = db.execute(sql_sentence)
+        return res.fetchall()

@@ -25,10 +25,9 @@ class UserService:
         self.hasher.update(password.encode())
         hashed = self.hasher.hexdigest()
         
-        sql_sentence = "SELECT * FROM users WHERE username = '{}' AND password = '{}'".format(username,hashed)  
-        print(sql_sentence)
+        sql_sentence = "SELECT * FROM users WHERE username = '{}' AND password = '{}'".format(username,hashed) 
         res = db.execute(sql_sentence)
-        
+    
         if res.fetchone() is not None:
             return True
         
