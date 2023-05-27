@@ -58,14 +58,14 @@ async def add_password(request: Request):
             json = await request.json()
             username = json["username"]
             password = json["password"]
-            dst = json["dst"]
-            return password_service.add(db,username,password,dst)
+            app_name = json["appName"]
+            return password_service.add(db,username,password,app_name)
     except:
         raise HTTPException(status_code=401, detail="no se pudo insertar contraseña")
 
 @app.get("/password",status_code=200)
-async def find_password(request: Request, username: str, dst: str):
+async def find_password(request: Request, username: str, appName: str):
     cookie = request.cookies.get('auth')
     if bool(cookie):
         password_service = PasswordService()
-        return password_service.get(db,username,dst)
+        return password_service.get(db,username,appName)
