@@ -16,12 +16,13 @@ class UserService:
             print(sql_sentence)
             db.put(sql_sentence,(username,hashed))
             
+
             return {"username": username, "password": hashed} 
         raise Exception('exception')
         
 
 
-    def login(self,db, username, password): 
+    def login(self, db, username, password): 
         self.hasher.update(password.encode())
         hashed = self.hasher.hexdigest()
         
@@ -29,6 +30,7 @@ class UserService:
         res = db.execute(sql_sentence)
     
         if res.fetchone() is not None:
-            return True
-        
+            token = '{}?{}'.format(username,True)
+            return token
+    
         raise Exception('invalid')

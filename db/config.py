@@ -10,7 +10,7 @@ class Database:
         cursor.execute(sql_sentence)
     
     def create_password_table(self):
-        sql_sentence = "create table if not exists passwords(username TEXT, password TEXT, appName TEXT)"
+        sql_sentence = "create table if not exists passwords(username TEXT, app_username TEXT, password TEXT, app_name TEXT)"
         cursor = self.con.cursor()
         cursor.execute(sql_sentence)
 
