@@ -11,7 +11,18 @@ class PasswordService:
         raise Exception('exception')
 
     def get(self,db,username,app_name):
-        sql_sentence = "SELECT * FROM passwords WHERE app_name = '{}' AND username = '{}' ".format(app_name,username) 
+        sql_sentence = "SELECT * FROM passwords WHERE app_name LIKE '{}%' AND username = '{}' ".format(app_name,username) 
         print(sql_sentence)
         res = db.execute(sql_sentence)
-        return res.fetchall()
+
+        data = res.fetchall()
+        for i in range(len(data)):
+            json = {
+                "username":data[i][0],
+                "app_username":data[i][1],
+                "password":data[i][2],
+                "app_name":data[i][3],
+            }
+            data[i] = json
+
+        return data
