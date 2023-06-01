@@ -44,7 +44,7 @@ async def login(request: Request, response: Response):
         username = json["username"]
         password = json["password"]
         res = user_service.login(db,username, password)
-        response.set_cookie(key="token", value=res)
+        response.set_cookie(key="token", value=res, secure=False, samesite="none")
         return {"cookie": res}
     except:
         raise HTTPException(status_code=400, detail="error en login")
