@@ -22,8 +22,20 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    json = {"Titulo": "Bienvenidos a la API - Vulnerable",
+            "Cuatrimestre": "1 Cuatrimestre 2023",
+            "Materia": "Criptografia y Seguridad Informática",
+            "Autores": [
+                {"Alumno": "Alejo Villores"},
+                {"Alumno": "Ignacio Brusati"},
+                {"Alumno": "Santiago Fernandez"},
+                {"Alumno": "Ignacio Iragui"}
+            ],
+            "Version": "1.0.0",
+            "Repositorio": "https://github.com/alejovillores/vulnerable-api-rest"
 
+        }
+    return json
 
 @app.post("/register",status_code=201)
 async def register(request: Request):
@@ -69,12 +81,25 @@ async def add_password(request: Request):
 
 @app.get("/password",status_code=200)
 async def find_password(request: Request, app_name: str):
-    
-    token = request.cookies.get('token')
-    if token != None:
-        username, status = token.split('?')
-        if bool(status) :
-            password_service = PasswordService()
-            return password_service.get(db,username,app_name)
+    try:
+        token = request.cookies.get('token')
+        if token != None:
+            username, status = token.split('?')
+            if bool(status) :
+                password_service = PasswordService()
+                return password_service.get(db,username,app_name)
+    except:
+        raise HTTPException(status_code=404, detail="no se pudo encontrar la contraseña")
 
+@app.get("/passwords",status_code=200)
+async def all_passwords(request: Request):
+    try:
+        token = request.cookies.get('token')
+        if token != None:
+            username, status = token.split('?')
+            if bool(status) :
+                password_service = PasswordService()
+                return password_service.get_all(db,username)
+    except:
+        raise HTTPException(status_code=404, detail="no se pudo obtener las contraseñas")
 

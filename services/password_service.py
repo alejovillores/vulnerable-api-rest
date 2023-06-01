@@ -12,9 +12,23 @@ class PasswordService:
 
     def get(self,db,username,app_name):
         sql_sentence = "SELECT * FROM passwords WHERE app_name LIKE '{}%' AND username = '{}' ".format(app_name,username) 
-        print(sql_sentence)
         res = db.execute(sql_sentence)
 
+        data = res.fetchall()
+        for i in range(len(data)):
+            json = {
+                "username":data[i][0],
+                "app_username":data[i][1],
+                "password":data[i][2],
+                "app_name":data[i][3],
+            }
+            data[i] = json
+
+        return data
+
+    def get_all(self,db,username):
+        sql_sentence = "SELECT * FROM passwords WHERE username = '{}'".format(username) 
+        res = db.execute(sql_sentence)
         data = res.fetchall()
         for i in range(len(data)):
             json = {
