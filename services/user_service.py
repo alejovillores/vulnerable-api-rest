@@ -7,11 +7,9 @@ class UserService:
     def register(self,db,username, password):
         sql_sentence = "SELECT * FROM users WHERE username = '{}'".format(username)
         res = db.execute(sql_sentence)
-        print("res:", res)
         if res.fetchone() == None:
             self.hasher.update(password.encode())
             hashed = self.hasher.hexdigest()    
-            print ("HASHED:" + hashed)
             sql_sentence = "INSERT INTO users VALUES(?,?);"
             print(sql_sentence)
             db.put(sql_sentence,(username,hashed))
