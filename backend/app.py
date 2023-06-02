@@ -62,6 +62,24 @@ async def login(request: Request, response: Response):
         raise HTTPException(status_code=400, detail="error en login")
 
 
+@app.get("/password/reset",status_code=200)
+async def reset_password(request: Request, new_password: str):
+    try:
+        token = request.cookies.get('token')
+        if token != None:
+            username, status = token.split('?')
+            if bool(status):
+                user_service = UserService()
+                res = user_service.reset_password(db,username,new_password)
+                return res
+        raise HTTPException(status_code=401, detail="No se encuentra la cookie")
+    except:
+        raise HTTPException(status_code=500, detail="Error en el reset de password")
+
+
+
+
+
 @app.post("/password",status_code=201)
 async def add_password(request: Request):
     try:
