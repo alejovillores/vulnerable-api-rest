@@ -1,0 +1,88 @@
+<div class="login-container">
+
+	<mat-tab-group class="custom-tab-group">
+
+		<mat-tab label="Login">
+
+			<form (ngSubmit)="login()">
+
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="username" id="username" name="username" [(ngModel)]="username" required>
+					<div *ngIf="showUsernameIsRequired" class="text-danger">
+						Username is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" [(ngModel)]="password" required>
+					<div *ngIf="showPasswordIsRequired" class="text-danger">
+						Password is required
+					</div>
+				</div>
+
+				<button type="submit">Login</button>
+
+			</form>
+		</mat-tab>
+
+		<mat-tab label="Register">
+			<form (ngSubmit)="register()">
+
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="username" id="username" name="username" [(ngModel)]="username" required>
+					<div *ngIf="showUsernameIsRequired" class="text-danger">
+						Username is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" [(ngModel)]="password" required>
+					<div *ngIf="showPasswordIsRequired" class="text-danger">
+						Password is required
+					</div>
+				</div>
+
+				<button type="submit">Register</button>
+
+			</form>
+		</mat-tab>
+
+		<mat-tab label="Change Password">
+			<form (ngSubmit)="changePassword()">
+
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="username" id="username" name="username" [(ngModel)]="username" required>
+					<div *ngIf="showUsernameIsRequired" class="text-danger">
+						Username is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="currentPassword">Current Password</label>
+					<input type="password" id="currentPassword" name="currentPassword" [(ngModel)]="currentPassword"
+						required>
+					<div *ngIf="showCurrentPasswordIsRequired" class="text-danger">
+						Current password is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="newPassword">New Password</label>
+					<input type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword" required>
+					<div *ngIf="showNewPasswordIsRequired" class="text-danger">
+						New password is required
+					</div>
+				</div>
+
+				<button type="submit">Change Password</button>
+			</form>
+		</mat-tab>
+
+	</mat-tab-group>
+
+</div>

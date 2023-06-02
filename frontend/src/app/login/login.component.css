@@ -1,0 +1,63 @@
+.login-container {
+	max-width: 700px;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	color: #333;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 40%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+	margin-top: 0;
+	text-align: center;
+}
+
+.login-container form {
+	margin-top: 20px;
+}
+
+.login-container .form-group {
+	margin-bottom: 15px;
+}
+
+.login-container label {
+	display: block;
+	font-weight: bold;
+}
+
+.login-container input[type="username"],
+.login-container input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.login-container button {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.login-container button:hover {
+	background-color: #45a049;
+}
+
+::ng-deep .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+	color: #333;
+}
+
+::ng-deep .mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline {
+	border-color: #333;
+}

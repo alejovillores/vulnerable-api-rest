@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>The password was successfully added</h2>
+<mat-dialog-content>
+	<div>
+		<strong>App Name:</strong>
+		<p [innerHTML]="appName"></p>
+	</div>
+
+	<div>
+		<strong>Username:</strong>
+		<p [innerHTML]="username"></p>
+	</div>
+
+	<div>
+		<strong>Password:</strong>
+		<p [innerHTML]="password"></p>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
