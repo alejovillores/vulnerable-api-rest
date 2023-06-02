@@ -1,1 +1,2 @@
-api-seguridad.db
+backend/api-seguridad.db
+backend/__pycache__/
