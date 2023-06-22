@@ -20,10 +20,13 @@ class Database:
         return res
     
     def put(self, sql_sentence,data):
-        cursor = self.con.cursor()
-        res = cursor.execute(sql_sentence,data)
-        self.con.commit()
-        return res
+        try:
+            cursor = self.con.cursor()
+            res = cursor.execute(sql_sentence,data)
+            self.con.commit()
+            return res
+        except sqlite3.Error as e:
+            print("SQLite3 Error occurred:", e)
     
 
     def close(self):

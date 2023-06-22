@@ -1,9 +1,9 @@
 class PasswordService: 
 
     def add(self,db,username,app_username, password,app_name):
-        sql_sentence = "SELECT * FROM users WHERE username = '{}'".format(username)
+        sql_sentence = "SELECT * FROM users WHERE username = ?"
 
-        res = db.execute(sql_sentence)
+        res = db.put(sql_sentence, (username,))
         if res.fetchone() != None:
             sql_sentence = "INSERT INTO passwords VALUES(?,?,?,?);"
             db.put(sql_sentence,(username, app_username, password, app_name))
@@ -11,8 +11,8 @@ class PasswordService:
         raise Exception('exception')
 
     def get(self,db,username,app_name):
-        sql_sentence = "SELECT * FROM passwords WHERE app_name LIKE '{}%' AND username = '{}' ".format(app_name,username) 
-        res = db.execute(sql_sentence)
+        sql_sentence = "SELECT * FROM passwords WHERE app_name LIKE ? AND username = ? "
+        res = db.put(sql_sentence, (app_name, username))
 
         data = res.fetchall()
         for i in range(len(data)):
@@ -27,8 +27,8 @@ class PasswordService:
         return data
 
     def get_all(self,db,username):
-        sql_sentence = "SELECT * FROM passwords WHERE username = '{}'".format(username) 
-        res = db.execute(sql_sentence)
+        sql_sentence = "SELECT * FROM passwords WHERE username = ?"
+        res = db.put(sql_sentence, (username,))
         data = res.fetchall()
         for i in range(len(data)):
             json = {

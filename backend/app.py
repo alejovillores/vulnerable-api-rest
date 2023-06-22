@@ -45,8 +45,8 @@ async def register(request: Request):
         username = json["username"]
         password = json["password"]
         return user_service.register(db,username, password)
-    except:
-        raise HTTPException(status_code=400, detail="ya se encuentra ese usuario")
+    except Exception as err:
+        raise HTTPException(status_code=400, detail=f"ya se encuentra ese usuario Error: {err}")
 
 @app.post("/login",status_code=200)
 async def login(request: Request, response: Response):
@@ -58,8 +58,8 @@ async def login(request: Request, response: Response):
         res = user_service.login(db,username, password)
         response.set_cookie(key="token", value=res, secure=False, samesite="none")
         return {"cookie": res}
-    except:
-        raise HTTPException(status_code=400, detail="error en login")
+    except Exception as err:
+        raise HTTPException(status_code=400, detail=f"error en login Error: {err}")
 
 
 @app.get("/password/reset",status_code=200)
@@ -72,9 +72,9 @@ async def reset_password(request: Request, new_password: str):
                 user_service = UserService()
                 res = user_service.reset_password(db,username,new_password)
                 return res
-        raise HTTPException(status_code=401, detail="No se encuentra la cookie")
-    except:
-        raise HTTPException(status_code=500, detail="Error en el reset de password")
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=f"Error en el reset de password Error: {err}")
+    raise HTTPException(status_code=401, detail="No se encuentra la cookie")
 
 
 
@@ -93,9 +93,9 @@ async def add_password(request: Request):
                 password = json["password"]
                 app_name = json["app_name"]
                 return password_service.add(db, username, app_username, password, app_name)
-        raise HTTPException(status_code=401, detail="no se pudo encontrar la cookie")
-    except:
-        raise HTTPException(status_code=401, detail="no se pudo insertar contraseña")
+    except Exception as err:
+        raise HTTPException(status_code=401, detail=f"no se pudo insertar contraseña Error: {err}")
+    raise HTTPException(status_code=401, detail="no se pudo encontrar la cookie")
 
 @app.get("/password",status_code=200)
 async def find_password(request: Request, app_name: str):
@@ -106,8 +106,8 @@ async def find_password(request: Request, app_name: str):
             if bool(status) :
                 password_service = PasswordService()
                 return password_service.get(db,username,app_name)
-    except:
-        raise HTTPException(status_code=404, detail="no se pudo encontrar la contraseña")
+    except Exception as err:
+        raise HTTPException(status_code=404, detail=f"no se pudo encontrar la contraseña Error: {err}")
 
 @app.get("/passwords",status_code=200)
 async def all_passwords(request: Request):
@@ -118,6 +118,6 @@ async def all_passwords(request: Request):
             if bool(status) :
                 password_service = PasswordService()
                 return password_service.get_all(db,username)
-    except:
-        raise HTTPException(status_code=404, detail="no se pudo obtener las contraseñas")
+    except Exception as err:
+        raise HTTPException(status_code=404, detail=f"no se pudo obtener las contraseñas Error: {err}")
 
