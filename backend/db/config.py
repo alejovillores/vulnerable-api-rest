@@ -2,7 +2,7 @@ import sqlite3
 
 class Database:
     def __init__(self):
-        self.con = sqlite3.connect("backend/api-seguridad.db")
+        self.con = sqlite3.connect("api-seguridad.db")
 
     def create_user_table(self):
         sql_sentence = "create table if not exists users(username TEXT, password TEXT)"

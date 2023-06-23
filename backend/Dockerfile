@@ -2,11 +2,9 @@ FROM python:3
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
+RUN pip install --no-cache-dir -r requeriments.txt
 
 EXPOSE 5000
 
-CMD [ "python", "./main.py" ]
+CMD poetry run uvicorn backend.main:app --host 0.0.0.0

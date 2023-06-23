@@ -33,7 +33,7 @@ export class FormComponent {
 			this.showUsernameIsRequired = false;
 			this.showPasswordIsRequired = false;
 
-			let url = 'http://0.0.0.0:5000/password';
+			let url = 'http://localhost:5000/password';
 
 			const data = {
 				app_name: this.app_name,
