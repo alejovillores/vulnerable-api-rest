@@ -7,6 +7,46 @@ from db.config import Database
 from services.user_service import UserService
 from services.password_service import PasswordService
 from auth.auth_handler import signJWT, decodeJWT
+from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+
+app = FastAPI()
+
+WILDCARD = "*"
+
+class DomainFilterMiddleware(BaseHTTPMiddleware):
+    def __init__(self, app: RequestResponseEndpoint, allowed_domains: list[str], allow_methods: list[str]):
+        super().__init__(app)
+        self.allowed_domains = allowed_domains
+        self.allowed_methods = allowed_methods
+
+    def allowed_client(self, address, port):
+        for domain in self.allowed_domains:
+            if domain != WILDCARD and address != domain[0]:
+                continue
+            if domain[1] == WILDCARD or domain[1] == port:
+                return True
+        return False
+    
+    def allowed_method(self, method):
+        all_allowed = WILDCARD in self.allowed_methods
+        method_allowed = method in self.allowed_methods
+
+        return all_allowed or method_allowed
+
+    async def dispatch(self, request: Request, call_next):
+        print(vars(request))
+
+        address = request.client[0]
+        port = request.client[1]
+        if not self.allowed_client(address, port):
+            return Response(content="Domain Not Authorized", status_code=401)
+        
+        method = request.method
+        if not self.allowed_method(method):
+            return Response(content="Method Not Authorized", status_code=401)
+
+        return await call_next(request)
+
 
 db = Database()
 db.create_user_table()
@@ -15,13 +55,18 @@ db.create_password_table()
 
 app = FastAPI()
 
+allowed_domains = [("127.0.0.1", 4200), ('127.0.0.1', "*")]
+allowed_methods = ["GET", "POST"]
+# app.add_middleware(DomainFilterMiddleware, allowed_domains=allowed_domains, allowed_methods=allowed_methods)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:4200", "127.0.0.1:4200"],
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=[],
     allow_headers=["*"],
 )
+
 
 def auth_user(request):
     try:
@@ -115,4 +160,3 @@ async def all_passwords(request: Request):
         return password_service.get_all(db,username)
     except Exception as err:
         raise HTTPException(status_code=404, detail=f"No se pudo obtener las contraseñas: {err}")
-
