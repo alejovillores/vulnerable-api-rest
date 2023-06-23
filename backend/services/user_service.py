@@ -25,11 +25,11 @@ class UserService:
         sql_sentence = "SELECT * FROM users WHERE username = ? AND password = ?"
         res = db.put(sql_sentence, (username,hashed))
     
-        if res.fetchone() is not None:
-            token = '{}?{}'.format(username,True)
-            return token
-    
-        raise Exception('invalid')
+        # if res.fetchone() is not None:
+        #     token = '{}?{}'.format(username,True)
+        #     return token
+        if res.fetchone() is None:
+            raise Exception('Invalid credentials')
     
     def reset_password(self,db,username,new_password):
         sql_sentence = "SELECT * FROM users WHERE username = ?"
