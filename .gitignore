@@ -1,8 +1,12 @@
-backend/api-seguridad.db
+# Ignore node_modules folder
+frontend/node_modules/
+
+# Ignore _pycache_ folder
 backend/__pycache__/
 backend/db/__pycache__/
 backend/services/__pycache__/
 backend/auth/__pycache__/
 backend/.env
 
-fronted/node_modules/
+# Ignore db
+backend/api-seguridad.db

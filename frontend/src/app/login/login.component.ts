@@ -42,9 +42,9 @@ export class LoginComponent {
 			const headers = new HttpHeaders().set('Content-Type', 'application/json');
 			const options = { headers, withCredentials: true };
 
-			this.http.post('http://0.0.0.0:5000/login', data, options).subscribe(
+			this.http.post('http://localhost:5000/login', data, options).subscribe(
 				response => {
-					this.http.get(`http://0.0.0.0:5000/password/reset?new_password=${this.newPassword}`, options).subscribe(
+					this.http.get(`http://localhost:5000/password/reset?new_password=${this.newPassword}`, options).subscribe(
 						response => {
 							this.dialog.open(GenericPopupComponent, {
 								data: { title: 'Success', message: 'Password successfully changed' },
@@ -64,11 +64,11 @@ export class LoginComponent {
 	}
 
 	login() {
-		this.send('http://0.0.0.0:5000/login', false);
+		this.send('http://localhost:5000/login', false);
 	}
 
 	register() {
-		this.send('http://0.0.0.0:5000/register', true)
+		this.send('http://localhost:5000/register', true)
 	}
 
 	send(url: string, isRegister: boolean) {
