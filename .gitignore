@@ -2,5 +2,6 @@ backend/api-seguridad.db
 backend/__pycache__/
 backend/db/__pycache__/
 backend/services/__pycache__/
+.env
 
 fronted/node_modules/
