@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request, HTTPException, Response
+from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -13,9 +14,10 @@ db.create_password_table()
 
 
 app = FastAPI()
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    allow_origins=["http://localhost:4200", "127.0.0.1:4200"],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
@@ -55,7 +57,7 @@ async def register(request: Request):
         password = json["password"]
         return user_service.register(db,username, password)
     except Exception as err:
-        raise HTTPException(status_code=400, detail=f"ya se encuentra ese usuario {err}")
+        raise HTTPException(status_code=400, detail=f"Error en register {err}")
 
 @app.post("/login",status_code=200)
 async def login(request: Request, response: Response):
@@ -70,7 +72,7 @@ async def login(request: Request, response: Response):
         response.set_cookie(key="token", value=token, samesite="Lax", httponly=True)
         return {"cookie": token}
     except Exception as err:
-        raise HTTPException(status_code=400, detail=f"error en login: {err}")
+        raise HTTPException(status_code=400, detail=f"Error en login: {err}")
 
 
 @app.get("/password/reset",status_code=200)

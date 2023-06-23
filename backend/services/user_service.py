@@ -14,7 +14,7 @@ class UserService:
             db.put(sql_sentence,(username,hashed))
             
             return {"username": username, "password": hashed} 
-        raise Exception('exception')
+        raise Exception('Usuario ya registrado')
         
 
 
