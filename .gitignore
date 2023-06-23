@@ -1,0 +1,8 @@
+# Ignore node_modules folder
+frontend/node_modules/
+
+# Ignore _pycache_ folder
+backend/__pycache__/
+
+# Ignore db
+backend/api-seguridad.db
