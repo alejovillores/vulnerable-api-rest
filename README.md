@@ -63,13 +63,13 @@ Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4
 ```bash
 # inicializar el servidor backend
 $ docker pull alejovillores/vulnerable-api-rest-backend:latest
-$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest
+$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
 ```
 
 ```bash
 # inicializar el servidor frontend
 $ docker pull alejovillores/vulnerable-api-rest-front:latest
-$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest
+$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
 # Cuando pregunta por y/N poner N
 ```
 
