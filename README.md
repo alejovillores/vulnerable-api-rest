@@ -43,10 +43,17 @@ ctrl -C
 ### Desarrollo Docker
 ```bash
 # inicializar el servidor backend
-$ docker build -t vulnerable-api-rest .
-$ docker run -it --rm --name vulnerable-api-rest vulnerable-api-rest
+
+$ docker pull alejovillores/vulnerable-api-rest-backend:latest
+$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest
 ```
 
+```bash
+# inicializar el servidor frontend
+$ docker pull alejovillores/vulnerable-api-rest-front:latest
+$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest
+# Cuando pregunta por y/N poner N
+```
 
 ## Endpoints
 
