@@ -63,9 +63,14 @@ Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4
 ```bash
 # inicializar el servidor backend
 $ docker pull alejovillores/vulnerable-api-rest-backend:latest
-$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
+$ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
 ```
 
+```bash
+# inicializar el servidor backend
+$ docker pull alejovillores/vulnerable-api-rest-backend:latest
+$ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest secure_api_backend
+```
 ```bash
 # inicializar el servidor frontend
 $ docker pull alejovillores/vulnerable-api-rest-front:latest
