@@ -77,7 +77,8 @@ $ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-re
 
 #### POST users
 
-```POST /login HTTP/1.1
+```
+POST /login HTTP/1.1
 Host: localhost:5000
 Content-Type: application/json
 Content-Length: 52
