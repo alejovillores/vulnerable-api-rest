@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requeriments.txt
 
 EXPOSE 5000
 
-CMD poetry run uvicorn backend.main:app --host 0.0.0.0
+CMD uvicorn main:app --host 0.0.0.0 --port 5000 --log-level info

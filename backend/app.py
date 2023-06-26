@@ -77,9 +77,6 @@ async def reset_password(request: Request, new_password: str):
         raise HTTPException(status_code=500, detail="Error en el reset de password")
 
 
-
-
-
 @app.post("/password",status_code=201)
 async def add_password(request: Request):
     try:

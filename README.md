@@ -71,13 +71,28 @@ $ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest alejovillores/vuln
 $ docker pull alejovillores/vulnerable-api-rest-backend:latest
 $ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest secure_api_backend
 ```
+
 ```bash
 # inicializar el servidor frontend
 $ docker pull alejovillores/vulnerable-api-rest-front:latest
-$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
+$ docker run -p 4200:4200 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
 # Cuando pregunta por y/N poner N
 ```
 
+```bash
+# inicializar el servidor backend
+# dentro /backend/
+$ docker build vulnerable-api-rest-backend .
+$ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
+```
+
+```bash
+# buildear el servidor frontend
+# dentro /frontend/
+$ docker build -t vulnerable-api-rest-front .
+$ docker run -p 4200:4200 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
+# Cuando pregunta por y/N poner N
+```
 ## Endpoints
 
 #### POST users
