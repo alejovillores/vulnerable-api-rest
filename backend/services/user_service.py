@@ -1,7 +1,8 @@
 import hashlib
 class UserService: 
-    def __init__(self):
+    def __init__(self, logger):
         self.hasher = hashlib.md5()
+        self.logger = logger
 
 
     def register(self,db,username, password):

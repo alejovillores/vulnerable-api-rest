@@ -2,13 +2,14 @@
 ---
 Esta API ha sido creada con propósitos educativos y tiene como objetivo mostrar diversas vulnerabilidades que pueden ser explotadas por terceros interesados en afectarla. Algunos ejemplos de ataques y vulnerabilidades que se presentan incluyen:
 
-| **_Vulnerabilidad_**     |
-|--------------------|
-| SQL Injection      |
-| CSRF               |
-| XSS                |
-| CORS               |
-| Text Plain Cookie  |
+| **_Vulnerabilidad_** |**_Nivel_**|
+|--------------------|-------------|
+| SQL Injection      |GRAVE        |         
+| CSRF               |GRAVE        |
+| XSS                |GRAVE        |
+| CORS               |LEVE         |
+| Text Plain Cookie  |GRAVE        |
+| MD5                |MEDIO        |
 
 
 ### Integrantes del Trabajo Práctico
@@ -60,16 +61,18 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
 Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4200/`.La aplicación se recargará automáticamente si cambia alguno de los archivos de origen.
 
 ## Desarrollo Docker
-```bash
-# inicializar el servidor backend
-$ docker pull alejovillores/vulnerable-api-rest-backend:latest
-$ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
-```
+
+![Docker Imagen](https://logos-world.net/docker-logo/)
+
+
+### Desde Docker hub
+
+**API Vulnerable**
 
 ```bash
 # inicializar el servidor backend
 $ docker pull alejovillores/vulnerable-api-rest-backend:latest
-$ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest secure_api_backend
+$ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
 ```
 
 ```bash
@@ -78,6 +81,8 @@ $ docker pull alejovillores/vulnerable-api-rest-front:latest
 $ docker run -p 4200:4200 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
 # Cuando pregunta por y/N poner N
 ```
+
+### Build local
 
 ```bash
 # inicializar el servidor backend
@@ -93,81 +98,76 @@ $ docker build -t vulnerable-api-rest-front .
 $ docker run -p 4200:4200 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
 # Cuando pregunta por y/N poner N
 ```
+
 ## Endpoints
 
 #### POST users
 
+```bash
+curl --location 'localhost:5000/login' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username":"usuario2",
+    "password":"password"
+}'
 ```
-POST /login HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Content-Length: 52
+####  Vulnerable a injeccion SQL
 
-{
-    "username":"juan",
-    "password":"perez"
-}
-```
-####  Vulnerable 
-
-```
-POST /login HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Content-Length: 57
-
-{
+```bash
+curl --location 'localhost:5000/login' \
+--header 'Content-Type: application/json' \
+--data '{
     "username":"' OR 1=1;-- ",
-    "password":""
-}
+    "password":"password"
+}'
 ```
 
-```
-POST /register HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Content-Length: 52
 
-{
-    "username":"juan",
-    "password":"perez"
-}
+```bash
+curl --location 'localhost:5000/register' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username":"usuario",
+    "password":"password"
+}'
 ```
 
-```
-GET /password/reset?new_password=alejovillores HTTP/1.1
-Host: localhost:5000
-Cookie: token="alejo?True"
+```bash
+curl --location 'localhost:5000/password/reset?new_password=pass' \
+--header 'Cookie: token="usuario?True"'
 ```
 #### POST passwords
 
-```
-POST /password HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Cookie: token="alejo?True"
-Content-Length: 99
-
-{
-    "app_username": "alejovillores",
+```bash
+curl --location 'localhost:5000/password' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token="usuario?True"' \
+--data '{
+    "app_username": "usuario",
     "password": "password",
     "app_name": "facebook"
-}
+}'
 ```
 
 #### GET passwords
 
 All passwords
-```
-GET /passwords HTTP/1.1
-Host: localhost:5000
-Cookie: token="alejo?True"
+```bash
+curl --location 'localhost:5000/passwords' \
+--header 'Cookie: token="usuario?True"'
 ```
 
 Password by ``app_name``
+```bash
+curl --location 'localhost:5000/password?app_name=fac' \
+--header 'Cookie: token="usuario?True"'
 ```
-GET /password?app_name=facebook HTTP/1.1
-Host: localhost:5000
-Cookie: token="alejo?True"
+
+#### Vulnerable to SQL Injection
+
+Obtener todo las contraseñas de los usuarios
+```bash
+curl --location 'localhost:5000/password?app_name=%27%20OR%201%3D1%3B%20--' \
+--header 'Cookie: token="usuario?True"'
 ```
 
