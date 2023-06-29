@@ -56,14 +56,14 @@ db.create_password_table()
 app = FastAPI()
 
 allowed_domains = [("127.0.0.1", 4200), ('127.0.0.1', "*")]
-allowed_methods = ["GET", "POST"]
+allowed_methods = ["GET", "POST", "OPTIONS"]
 # app.add_middleware(DomainFilterMiddleware, allowed_domains=allowed_domains, allowed_methods=allowed_methods)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:4200", "127.0.0.1:4200"],
     allow_credentials=True,
-    allow_methods=[],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
