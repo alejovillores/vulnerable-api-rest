@@ -13,7 +13,7 @@ export class SearchComponent {
 	constructor(private http: HttpClient) { }
 
 	searchPasswords() {
-		let url = `http://0.0.0.0:5000/password?app_name=${this.text}`;
+		let url = `http://localhost:5000/password?app_name=${this.text}`;
 
 		const headers = new HttpHeaders().set('Content-Type', 'application/json');
 		const options = { headers, withCredentials: true };
