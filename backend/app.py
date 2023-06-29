@@ -19,7 +19,7 @@ db.create_password_table()
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:4200"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -100,7 +100,7 @@ async def add_password(request: Request):
                 app_name = json["app_name"]
                 return password_service.add(db, username, app_username, password, app_name)
         raise HTTPException(status_code=401, detail="no se pudo encontrar la cookie")
-    except e:
+    except Exception as e:
         raise e
 
 @app.get("/password",status_code=200)

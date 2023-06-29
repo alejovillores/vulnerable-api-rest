@@ -24,13 +24,13 @@ import { LoginServiceComponent } from './login-service/login-service.component';
   declarations: [
     AppComponent,
     FormComponent,
-    TableComponent,
-    LoginComponent,
-    SearchComponent,
-    NavbarComponent,
     GenericPopupComponent,
+    LoginServiceComponent,
+    LoginComponent,
+    NavbarComponent,
+    SearchComponent,
     SuccessPopupComponent,
-    LoginServiceComponent
+    TableComponent
   ],
   imports: [
     BrowserModule,
