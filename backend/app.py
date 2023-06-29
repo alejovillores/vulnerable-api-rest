@@ -99,7 +99,7 @@ async def register(request: Request):
         user_service = UserService()
         json = await request.json()
         username = json["username"]
-        password = json["password"]zzz
+        password = json["password"]
         return user_service.register(db,username, password)
     except Exception as err:
         raise HTTPException(status_code=400, detail=f"Error en register {err}")
