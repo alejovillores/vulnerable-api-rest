@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
 	selector: 'app-success-popup',
@@ -12,11 +11,11 @@ export class SuccessPopupComponent {
 	username: any;
 	password: any;
 
-	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private sanitizer: DomSanitizer) { }
+	constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
 	ngOnInit() {
-		this.appName = this.sanitizer.bypassSecurityTrustHtml(this.data.appName);
-		this.username = this.sanitizer.bypassSecurityTrustHtml(this.data.username);
-		this.password = this.sanitizer.bypassSecurityTrustHtml(this.data.password);
+		this.appName = this.data.appName;
+		this.username =this.data.username;
+		this.password = this.data.password;
 	}
 }
