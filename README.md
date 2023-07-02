@@ -60,16 +60,19 @@ Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-
 Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4200/`.La aplicación se recargará automáticamente si cambia alguno de los archivos de origen.
 
 ## Desarrollo Docker
-```bash
-# inicializar el servidor backend
-$ docker pull alejovillores/vulnerable-api-rest-backend:latest
-$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
-```
+
+Desde el directorio *backend*
 
 ```bash
-# inicializar el servidor frontend
-$ docker pull alejovillores/vulnerable-api-rest-front:latest
-$ docker run -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
+# inicializar el servidor backend
+$ make run-server
+```
+
+Desde el directorio *frontend*
+
+```bash
+# inicializar el cliente frontend
+$ make run-client
 # Cuando pregunta por y/N poner N
 ```
 

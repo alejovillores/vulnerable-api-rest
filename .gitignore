@@ -10,3 +10,4 @@ backend/.env
 
 # Ignore db
 backend/api-seguridad.db
+api-seguridad.db
