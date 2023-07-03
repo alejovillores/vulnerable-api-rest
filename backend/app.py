@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from db.config import Database
 from services.user_service import UserService
 from services.password_service import PasswordService
+from services.mail_service import EmailService
+
 
 import logging
 
@@ -128,4 +130,15 @@ async def all_passwords(request: Request):
                 return password_service.get_all(db,username)
     except:
         raise HTTPException(status_code=404, detail="no se pudo obtener las contraseñas")
+
+
+
+@app.post("/email", status_code=200)
+async def send_email():
+    try:
+        email_service = EmailService()
+        email_service.send_email()
+        return "Sent"
+    except:
+       raise HTTPException(status_code=500, detail="Error enviando el email")
 

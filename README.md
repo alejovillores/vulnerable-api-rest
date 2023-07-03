@@ -62,9 +62,6 @@ Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4
 
 ## Desarrollo Docker
 
-![Docker Imagen](https://logos-world.net/docker-logo/)
-
-
 ### Desde Docker hub
 
 **API Vulnerable**
@@ -170,4 +167,20 @@ Obtener todo las contraseñas de los usuarios
 curl --location 'localhost:5000/password?app_name=%27%20OR%201%3D1%3B%20--' \
 --header 'Cookie: token="usuario?True"'
 ```
+
+
+
+#### Email credentials
+
+**email:** fiuba.seguridad.grupo2@gmail.com\
+**password:** fiuba1c2023
+
+![Email Example](email.png)
+
+#### Send fake email for CRFS 
+```bash
+curl --location --request POST 'localhost:5000/email'
+```
+
+
 
