@@ -62,39 +62,25 @@ Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4
 
 ## Desarrollo Docker
 
-### Desde Docker hub
-
-**API Vulnerable**
+Desde el directorio *backend*
 
 ```bash
 # inicializar el servidor backend
-$ docker pull alejovillores/vulnerable-api-rest-backend:latest
-$ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
+$ make run-server
 ```
 
+
+
+Desde el directorio *frontend*
+
+
 ```bash
-# inicializar el servidor frontend
-$ docker pull alejovillores/vulnerable-api-rest-front:latest
-$ docker run -p 4200:4200 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
+# inicializar el cliente frontend
+$ make run-client
 # Cuando pregunta por y/N poner N
 ```
 
-### Build local
 
-```bash
-# inicializar el servidor backend
-# dentro /backend/
-$ docker build vulnerable-api-rest-backend .
-$ docker run -p 5000:5000 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-backend
-```
-
-```bash
-# buildear el servidor frontend
-# dentro /frontend/
-$ docker build -t vulnerable-api-rest-front .
-$ docker run -p 4200:4200 -it --rm --name vulnerable-api-rest alejovillores/vulnerable-api-rest-front
-# Cuando pregunta por y/N poner N
-```
 
 ## Endpoints
 

@@ -1,5 +1,5 @@
 # Utiliza una imagen base de Node con la versión más reciente
-FROM node:latest
+FROM node:16
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
