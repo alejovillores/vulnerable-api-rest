@@ -128,6 +128,7 @@ curl --location 'localhost:5000/register' \
     "password":"password"
 }'
 ```
+#### POST reset passwords
 
 ```bash
 curl --location 'localhost:5000/password/reset?new_password=pass' \
