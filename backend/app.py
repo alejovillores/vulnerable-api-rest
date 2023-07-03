@@ -104,7 +104,7 @@ async def register(request: Request):
     except Exception as err:
         raise HTTPException(status_code=400, detail=f"Error en register {err}")
 
-@app.post("/login",status_code=200)
+@app.post("/login", status_code=200)
 async def login(request: Request, response: Response):
     try:
         user_service = UserService()
@@ -120,10 +120,12 @@ async def login(request: Request, response: Response):
         raise HTTPException(status_code=400, detail=f"Error en login: {err}")
 
 
-@app.get("/password/reset",status_code=200)
-async def reset_password(request: Request, new_password: str):
+@app.post("/password/reset", status_code=200)
+async def reset_password(request: Request):
     try:
         username = auth_user(request)
+        json = await request.json()
+        new_password = json["new_password"]
         user_service = UserService()
         res = user_service.reset_password(db, username, new_password)
         return res
