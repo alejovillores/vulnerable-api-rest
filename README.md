@@ -62,18 +62,22 @@ Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4
 
 ## Desarrollo Docker
 
-Desde el directorio *backend*
+### Windows
 
+```bash
+docker build -t "insecure-api-rest-backend:latest" backend/Dockerfile
+docker run -p 5000:5000 -it --rm --name insecure-api-rest-backend insecure-api-rest-backend:latest
+```
+
+
+### Linux
+Desde el directorio *backend*
 ```bash
 # inicializar el servidor backend
 $ make run-server
 ```
 
-
-
-Desde el directorio *frontend*
-
-
+Desde el directorio *frontend* 
 ```bash
 # inicializar el cliente frontend
 $ make run-client
