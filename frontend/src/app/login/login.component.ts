@@ -44,7 +44,7 @@ export class LoginComponent {
 
 			this.http.post('http://localhost:5000/login', data, options).subscribe(
 				response => {
-					this.http.get(`http://localhost:5000/password/reset?new_password=${this.newPassword}`, options).subscribe(
+					this.http.post(`http://localhost:5000/password/reset`, {new_password: this.newPassword}, options).subscribe(
 						response => {
 							this.dialog.open(GenericPopupComponent, {
 								data: { title: 'Success', message: 'Password successfully changed' },
