@@ -78,78 +78,80 @@ $ make run-client
 
 ## Endpoints
 
+Se agregan los endpoints que muestran vulnerabilidad para que se vea que al correrlos no muestra las vulnerabilidades
+
 #### POST users
 
-```POST /login HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Content-Length: 52
-
-{
-    "username":"juan",
-    "password":"perez"
-}
+```bash
+curl --location 'localhost:5000/login' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username":"usuario2",
+    "password":"password"
+}'
 ```
-####  Vulnerable 
+####  Vulnerable a injeccion SQL
 
-```
-POST /login HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Content-Length: 57
-
-{
+```bash
+curl --location 'localhost:5000/login' \
+--header 'Content-Type: application/json' \
+--data '{
     "username":"' OR 1=1;-- ",
-    "password":""
-}
+    "password":"password"
+}'
 ```
 
-```
-POST /register HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Content-Length: 52
 
-{
-    "username":"juan",
-    "password":"perez"
-}
+```bash
+curl --location 'localhost:5000/register' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username":"usuario",
+    "password":"password"
+}'
 ```
+#### POST reset passwords
 
-```
-GET /password/reset?new_password=alejovillores HTTP/1.1
-Host: localhost:5000
-Cookie: token="alejo?True"
+```bash
+curl --location 'localhost:5000/password/reset' \
+--header 'Cookie: token=<token>'
+--data '{
+    "new_password":"password"
+}'
 ```
 #### POST passwords
 
-```
-POST /password HTTP/1.1
-Host: localhost:5000
-Content-Type: application/json
-Cookie: token="alejo?True"
-Content-Length: 99
-
-{
-    "app_username": "alejovillores",
+```bash
+curl --location 'localhost:5000/password' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: token=<token>' \
+--data '{
+    "app_username": "usuario",
     "password": "password",
     "app_name": "facebook"
-}
+}'
 ```
 
 #### GET passwords
 
 All passwords
-```
-GET /passwords HTTP/1.1
-Host: localhost:5000
-Cookie: token="alejo?True"
+```bash
+curl --location 'localhost:5000/passwords' \
+--header 'Cookie: token=<token>'
 ```
 
 Password by ``app_name``
+```bash
+curl --location 'localhost:5000/password?app_name=fac' \
+--header 'Cookie: token=<token>'
 ```
-GET /password?app_name=facebook HTTP/1.1
-Host: localhost:5000
-Cookie: token="alejo?True"
+
+#### Vulnerable to SQL Injection
+
+Obtener todo las contraseñas de los usuarios
+```bash
+curl --location 'localhost:5000/password?app_name=%27%20OR%201%3D1%3B%20--' \
+--header 'Cookie: token=<token>'
 ```
+
 
