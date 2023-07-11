@@ -69,6 +69,11 @@ docker build -t "insecure-api-rest-backend:latest" backend/Dockerfile
 docker run -p 5000:5000 -it --rm --name insecure-api-rest-backend insecure-api-rest-backend:latest
 ```
 
+```bash
+docker build -t "insecure-api-rest-frontend:latest" frontend/Dockerfile
+docker run -p 5000:5000 -it --rm --name insecure-api-rest-frontend insecure-api-rest-frontend:latest
+Apretar N en el Y/n
+```
 
 ### Linux
 Desde el directorio *backend*
