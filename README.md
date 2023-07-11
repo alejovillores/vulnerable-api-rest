@@ -167,10 +167,10 @@ curl --location 'localhost:5000/password?app_name=%27%20OR%201%3D1%3B%20--' \
 
 
 #### Email credentials
+**Cambiar receiver por su mail**
+[Acá](https://github.com/alejovillores/vulnerable-api-rest/blob/e3e386eda14cfe4b563615faafb263762e63d8d3/backend/services/mail_service.py#L12)
 
-**email:** fiuba.seguridad.grupo2@gmail.com\
-**password:** fiuba1c2023
-
+Mirar en Spam
 ![Email Example](email.png)
 
 #### Send fake email for CRFS 
