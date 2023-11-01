@@ -61,6 +61,24 @@ Ejecute `ng serve` para un servidor de desarrollo. Navegue a `http://localhost:4
 
 ## Desarrollo Docker
 
+**Atencion ->** Descargar [.env](https://drive.google.com/file/d/1dKcaL3g-YWB7BSE99YyXSHXQrGr4SJgk/view?usp=sharing)
+
+### Windows
+
+Desde el directorio *backend*
+
+```bash
+docker build -t "secure-api-rest-backend:latest" .
+docker run -p 5000:5000 -it --rm --name insecure-api-rest-backend secure-api-rest-backend:latest
+```
+Desde el directorio *frontend*
+
+```bash
+docker build -t "secure-api-rest-frontend:latest" ,
+docker run -p 5000:5000 -it --rm --name secure-api-rest-frontend secure-api-rest-frontend:latest
+Apretar N en el Y/n
+```
+### Linux
 Desde el directorio *backend*
 
 ```bash
