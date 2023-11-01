@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "15249a8e-25bd-4cfe-a278-7029024098ef",
+		"name": "SEGURIDAD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27226325"
+	},
+	"item": [
+		{
+			"name": "REGISTER",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"usuario3\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/register",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NEW PASSWORD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"app_username\": \"mi_usuario_twitter\",\r\n    \"password\": \"password\",\r\n    \"app_name\": \"twitter\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/password",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"password"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "gAAAAABkd4Z_UuViBmgMxvjCr5LxUQ3PoWS5e9B8bcNMQ6wH-CriZgVqUczYA1GJozbdwwMl66fN3MQXj3JGQXVDoysy_Xzn3w==",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET PASSWORD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/passwords",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"passwords"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET PASSWORD ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/password?app_name=tw",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"password"
+					],
+					"query": [
+						{
+							"key": "app_name",
+							"value": "tw"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"usuario3\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEND EMAIL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/email",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RESET PASSWORD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/password/reset?new_password=pass",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"password",
+						"reset"
+					],
+					"query": [
+						{
+							"key": "new_password",
+							"value": "pass"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
